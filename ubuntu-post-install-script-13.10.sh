@@ -32,10 +32,7 @@ echo '#-------------------------------------------#'
 function sysupgrade {
 # Perform system upgrade
 echo ''
-read -p 'Proceed with system upgrade? (Y)es, (N)o : ' REPLY
-case $REPLY in
-# Positive action
-[Yy]* )
+
     # Update Repository Information
     echo 'Updating repository information...'
     echo 'Requires root privileges:'
@@ -45,17 +42,9 @@ case $REPLY in
     sudo apt-get dist-upgrade -y
     echo 'Done.'
     main
-    ;;
-# Negative action
-[Nn]* )
-    clear && main
-    ;;
-# Error
-* )
-    clear && echo 'Sorry, try again.'
-    sysupgrade
-    ;;
-esac
+
+
+
 }
 
 # INSTALL APPLICATIONS
@@ -76,28 +65,15 @@ nautilus-open-terminal
 pyrenamer
 sparkleshare
 xchat
+vim
 vlc'
 echo ''
-read -p 'Proceed? (Y)es, (N)o : ' REPLY
-case $REPLY in
-# Positive action
-[Yy]* ) 
+
     echo 'Requires root privileges:'
     # Feel free to change to whatever suits your preferences.
-    sudo apt-get install -y --no-install-recommends darktable easytag filezilla gnome-tweak-tool gpick grsync nautilus-dropbox nautilus-open-terminal pyrenamer sparkleshare xchat vlc
+    sudo apt-get install -y --no-install-recommends darktable easytag filezilla gnome-tweak-tool gpick grsync nautilus-dropbox nautilus-open-terminal pyrenamer sparkleshare xchat vim vlc
     echo 'Done.'
     main
-    ;;
-# Negative action
-[Nn]* )
-    clear && main
-    ;;
-# Error
-* )
-    clear && echo 'Sorry, try again.'
-    favourites
-    ;;
-esac
 }
 
 # INSTALL SYSTEM TOOLS
@@ -105,7 +81,6 @@ function system {
 echo ''
 echo '1. Install favourite system utilities?'
 echo '2. Install fingerprint reader software?'
-echo '3. Install IRC Bot software?'
 echo 'r. Return.'
 echo ''
 read -p 'What would you like to do? (Enter your choice) : ' REPLY
@@ -118,6 +93,7 @@ case $REPLY in
     aptitude
     dconf-tools
     openjdk-7-jdk
+    icedtea-7-plugin
     openssh-server
     p7zip-full
     ppa-purge
@@ -126,28 +102,18 @@ case $REPLY in
     symlinks
     synaptic
     virt-manager
-    zsync'
+    zsync
+    lame'
     echo ''
-    read -p 'Proceed? (Y)es, (N)o : ' REPLY
-    case $REPLY in
-    # Positive action
-    [Yy]* )
+    
         echo 'Requires root privileges:'
         # Feel free to change to whatever suits your preferences.
-        sudo apt-get install -y --no-install-recommends aptitude dconf-tools openjdk-7-jdk openssh-server p7zip-full ppa-purge samba ssh symlinks synaptic virt-manager zsync
-        echo 'Done.'
+        sudo apt-get install -y --no-install-recommends lame aptitude dconf-tools openjdk-7-jdk icedtea-7-plugin openssh-server p7zip-full ppa-purge samba ssh symlinks synaptic virt-manager zsync
+        echo 'Done.'c
         clear && system
-        ;;
-    # Negative action
-    [Nn]* )
-        clear && system
-        ;;
-    # Error
-    * )
-        clear && echo 'Sorry, try again.'
-        system
-        ;;
-    esac
+    
+
+    
     ;;
 # Install Fingerprint Reader Software
 2)
@@ -161,40 +127,12 @@ case $REPLY in
     echo 'Done.'
     system
     ;;
-# Install IRC Bot Software
-3)
-    echo 'Installing IRC Bot software...'
-    echo ''
-    echo 'Current package list:
-    python-soappy
-    supybot'
-    echo ''
-    read -p 'Proceed? (Y)es, (N)o : ' REPLY
-    case $REPLY in
-    # Positive action
-    [Yy]* )
-        echo 'Requires root privileges:'
-        # Feel free to change to whatever suits your preferences.
-        sudo apt-get install -y python-soappy supybot
-        echo 'Done.'
-        clear && system
-        ;;
-    # Negative action
-    [Nn]* ) 
-        clear && system
-        ;;
-    # Error
-    * ) 
-        clear && echo 'Sorry, try again.' && system
-        ;;
-    esac
-    ;;
 # Return
 [Rr]*) 
     clear && main;;
 # Invalid choice
 * ) 
-    clear && echo 'Not an option, try again.' && development;;
+    clear && echo 'Not an option, try again.' && gnome;;
 esac
 }
 
@@ -335,26 +273,11 @@ case $REPLY in
     ruby
     ubuntu-dev-tools'
     echo ''
-    read -p 'Proceed? (Y)es, (N)o : ' REPLY
-    case $REPLY in
-    # Positive action
-    [Yy]* ) 
-        echo 'Requires root privileges:'
-        # Feel free to change to whatever suits your preferences.
-        sudo apt-get install -y bzr devscripts eclipse git glade gtk-3-examples python-launchpadlib python3-distutils-extra qtcreator ruby ubuntu-dev-tools
-        echo 'Done.'
-        development
-        ;;
-    # Negative action
-    [Nn]* )
-        clear && development
-        ;;
-    # Error
-    * )
-        clear && echo 'Sorry, try again.'
-        development
-        ;;
-    esac
+    echo 'Requires root privileges:'
+    # Feel free to change to whatever suits your preferences.
+    sudo apt-get install -y bzr devscripts eclipse git glade gtk-3-examples python-launchpadlib python3-distutils-extra qtcreator ruby ubuntu-dev-tools
+    echo 'Done.'
+    development
     ;;
 # Install Ubuntu SDK
 2)
@@ -398,24 +321,14 @@ icontool
 imagemagick
 inkscape'
 echo ''
-read -p 'Proceed? (Y)es, (N)o : ' REPLY
-case $REPLY in
-# Positive action
-[Yy]* ) 
+
     echo 'Requires root privileges:'
     # Feel free to change to whatever suits your preferences.
     sudo apt-get install -y fontforge fontforge-extras gimp gimp-plugin-registry icontool imagemagick inkscape
     echo 'Done.'
     main
-    ;;
-# Negative action
-[Nn]* ) 
-    clear && main;;
-# Error
-* )
-    clear && echo 'Sorry, try again.' && design
-    ;;
-esac
+    
+
 }
 
 
@@ -550,6 +463,9 @@ echo '7. Install Sublime Text 2?'
 echo '8. Install Sublime Text 3 (build 3047)?'
 echo '9. Install Pantheon Desktop?'
 echo '10. Install Spotify client'
+echo '11. Install Jupiter Energy Saver'
+echo '12. Install Teamviewer'
+echo '13. Install f.lux'
 echo 'r. Return'
 echo ''
 read -p 'What would you like to do? (Enter your choice) : ' REPLY
@@ -722,6 +638,28 @@ case $REPLY in
     echo 'Done.'
     thirdparty
     ;;
+#Jupiter
+11)
+    #Add repository
+    sudo add-apt-repository -y ppa:webupd8team/jupiter
+    sudo apt-get update
+    sudo apt-get install -y jupiter
+    echo 'Done.'
+    thirdparty
+    ;;
+#teamviewer
+12)
+    sudo dpkg -i teamviewer_linux_x64.deb
+    sudo apt-get install -f
+    echo 'Done.'
+    ;;
+#f.lux
+13)
+    sudo add-apt-repository -y ppa:kilian/f.lux
+    sudo apt-get update
+    sudo apt-get install -y fluxgui
+    echo 'Done.'
+    ;;
 # Return
 [Rr]*) 
     clear && main;;
@@ -868,6 +806,7 @@ esac
 
 #----- MAIN FUNCTION -----#
 function main {
+    sudo -s echo 'Became admin'
 echo ''
 echo '1. Perform system update & upgrade?'
 echo '2. Install favourite applications?'
